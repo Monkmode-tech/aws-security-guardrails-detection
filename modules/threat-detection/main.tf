@@ -55,6 +55,7 @@ locals {
 # GuardDuty
 #------------------------------------------------------------------------------
 resource "aws_guardduty_detector" "this" {
+  # checkov:skip=CKV2_AWS_3: Single-account portfolio baseline; an AWS Organization would add a delegated GuardDuty administrator
   enable                       = true
   finding_publishing_frequency = "FIFTEEN_MINUTES"
 }
@@ -261,6 +262,7 @@ resource "aws_iam_role_policy" "config_delivery" {
 }
 
 resource "aws_config_configuration_recorder" "this" {
+  # checkov:skip=CKV2_AWS_48: Curated resource types by design to control cost; set config_record_all_resources = true to record everything
   name     = "${var.name}-recorder"
   role_arn = aws_iam_role.config.arn
 
@@ -296,6 +298,7 @@ resource "aws_config_delivery_channel" "this" {
 }
 
 resource "aws_config_configuration_recorder_status" "this" {
+  # checkov:skip=CKV2_AWS_45: Curated resource types by design to control cost; set config_record_all_resources = true to record everything
   name       = aws_config_configuration_recorder.this.name
   is_enabled = true
 
@@ -359,6 +362,7 @@ resource "aws_ebs_encryption_by_default" "this" {
 }
 
 resource "aws_iam_account_password_policy" "this" {
+  # checkov:skip=CKV_AWS_9: Forced periodic expiry is omitted per NIST SP 800-63B; length, complexity and reuse limits are enforced
   minimum_password_length        = 14
   require_lowercase_characters   = true
   require_uppercase_characters   = true

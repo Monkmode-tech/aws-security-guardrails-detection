@@ -1,0 +1,27 @@
+# Checkov configuration. Each repo-wide skip is a documented decision;
+# resource-specific exceptions are inline `checkov:skip` comments next to the code.
+compact: true
+quiet: true
+framework:
+  - terraform
+skip-path:
+  - .terraform
+  - .build
+skip-check:
+  # KMS key policies: "*" in a key policy means "this key"; access is scoped by
+  # principals and conditions (see modules/kms and modules/abac-healthcare).
+  - CKV_AWS_109
+  - CKV_AWS_111
+  - CKV_AWS_356
+  # Log buckets are the logging destination; logging them again is recursive.
+  - CKV_AWS_18
+  # Cross-region replication of audit logs is a production follow-up, not lab scope.
+  - CKV_AWS_144
+  # Nothing consumes S3 event notifications here.
+  - CKV2_AWS_62
+  # Searchable CloudWatch retention is 90 days; the full trail is kept 1 year in S3.
+  - CKV_AWS_338
+  # Alerting is done with metric filters + EventBridge, not trail-level SNS.
+  - CKV_AWS_252
+  # State locking is set in backend.hcl (use_lockfile = true), not in code.
+  - CKV_TF_3

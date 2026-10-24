@@ -1,0 +1,7 @@
+# Uses the state bucket created by bootstrap/ in aws-secure-three-tier-platform.
+# Copy to backend.hcl (git-ignored), then: terraform init -backend-config=backend.hcl
+bucket       = "tfstate-<ACCOUNT_ID>-us-east-2"
+key          = "aws-security-guardrails-detection/account-baseline/terraform.tfstate"
+region       = "us-east-2"
+encrypt      = true
+use_lockfile = true

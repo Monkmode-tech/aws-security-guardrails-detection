@@ -1,0 +1,16 @@
+# Copy to terraform.tfvars (git-ignored) and edit.
+# Credentials come from your AWS CLI / SSO profile - never put keys here.
+
+aws_region = "us-east-2"
+name       = "secbase"
+
+critical_alert_emails = ["you@example.com"]
+change_alert_emails   = ["you@example.com"]
+
+# Start with remediations reporting only; flip to false once you have reviewed
+# the dry-run alerts and are happy with what they would change.
+remediation_dry_run = true
+
+# Security Hub pages you for CRITICAL findings only at first (the initial scan
+# of a new account produces a burst of findings). Add "HIGH" later.
+securityhub_alert_severities = ["CRITICAL"]

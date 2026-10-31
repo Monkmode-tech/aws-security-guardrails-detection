@@ -179,7 +179,7 @@ docs/                  architecture, detection catalog, playbooks, ABAC, runbook
 
 ## Background
 
-Built by **Caleb Tetteh** (M.S. Cloud Computing Systems, UMGC; B.S. Computer
+Built by **Caleb Tetteh** (M.S. Cloud Computing, UMGC; B.S. Computer
 Science, Georgia Tech). It turns three course designs into running code: the
 HIPAA IAM design from CLCS 605, and the security architecture (defense in depth,
 automated threat detection, DevSecOps) and Zero Trust governance work from
